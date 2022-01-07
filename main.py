@@ -1,16 +1,15 @@
 from github import Github
 import private_token
-from notion2md.exporter import block_exporter
-
-# First create a Github instance:
 
 # using an access private_token.py
-g = Github(private_token.token)
+user = Github(private_token.token)
+# Create a list with your repositories
+repositories = [str(repo.full_name) for repo in user.get_user().get_repos()]
 
-# Then play with your Github objects:
-for repo in g.get_user().get_repos():
-    print(repo.name)
+# Get user's login
+login = user.get_user().login
 
-#output_path is optional
+# Create repo variable for
+repo = user.get_repo(f'{login}/gitnotiotest')
 
-block_exporter("https://www.notion.so/nibezo/test-8da692129af94b5da1810bd34ac13a2e")
+# repo.create_file('test.md', '`hello!`', 'is it a commit?', branch='test')
